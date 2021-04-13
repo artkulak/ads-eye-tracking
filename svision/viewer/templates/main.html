@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+{% load static %}
+{% load tags %}
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}">
+
+        <title>Main Page</title>
+    </head>
+    <body>
+<div class="page">
+<header class="header">
+    <div class="container">
+
+        <div class="header_elements">
+            <div class="Logo"><a href="/" style="text-decoration: none;">sVision</a></div>
+            <div class="header_user">{{ name }}<img class = "user" src="{% static 'images/user.png' %}" alt="">
+            </div>
+    </div>
+
+    </div>
+    </header>
+
+     <main class="main">
+        <div class="container">
+            {% if is_staff %}
+                <a href="admin_panel/" class="btn">Control Panel</a>
+            {% endif %}
+        <div class="video_lines">
+            {% for video in video_data %}
+                {% if forloop.counter|modulo:4 == 1 %}
+                    <div class="line">
+                        <div class="video"><a href="video/{{ forloop.counter }}"><img class = "play" src="{% static 'images/play.png' %}" alt=""><a class="text_video">{{video.video_name}}</a></a></div>
+                {% elif forloop.counter|modulo:4 == 0 %}
+                <div class="video"><a href="video/{{ forloop.counter }}"><img class = "play" src="{% static 'images/play.png' %}" alt=""><a class="text_video">{{video.video_name}}</a></a></div>
+                    </div>
+                {% else %}
+                <div class="video"><a href="video/{{ forloop.counter }}"><img class = "play" src="{% static 'images/play.png' %}" alt=""><a class="text_video">{{video.video_name}}</a></a></div>
+                {% endif %}
+
+                {% if forloop.last and forloop.counter|modulo:4 != 0 %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+    </div>
+    </main>
+
+    <footer class="footer">
+    <div class="container">
+        <div class="copyright">Copyright © 2021 sVision</div>
+    </div>
+    </footer>
+        </div>
+
+
+
+    </body>
+</html>
+
